@@ -15,6 +15,12 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @user = User.find_by(id: params[:user_id])
+    unless @user
+      render json: {error: 'Product not found'}, status: 404
+      return
+    end
+    @product = Product.new
   end
 
   def create
@@ -24,6 +30,7 @@ class ProductsController < ApplicationController
       return
     end
     @product = @user.products.create(product_params)
+    render 'show'
   end
 
   def destroy

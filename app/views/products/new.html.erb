@@ -17,6 +17,11 @@
     <%= f.datetime_field :deadline %>
   </div><br>
 
+  <div class="field">
+    <%= f.label :min_bid %><br>
+    <%= f.number_field :min_bid, class: :text_field, step: :any %>
+  </div><br>
+
   <div class="actions">
     <%= f.submit %>
   </div>

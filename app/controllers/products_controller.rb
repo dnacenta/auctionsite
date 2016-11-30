@@ -1,17 +1,26 @@
 class ProductsController < ApplicationController
 
-  def index
+  def index_all
     @products = Product.all
   end
+
+  def index
+    @user = User.find_by(id: params[:user_id])
+    unless @user
+      render json: {error: 'User not found'}, status: 404
+      return
+    end
+    @products = @user.products
+  end
+
 
   def show
     @user = User.find_by(id: params[:user_id])
     unless @user
-      render json: {error: 'Product not found'}, status: 404
+      render json: {error: 'User not found'}, status: 404
       return
     end
     @product = @user.products.find_by(id: params[:id])
-
   end
 
   def new
@@ -50,6 +59,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :deadline)
+    params.require(:product).permit(:title, :description, :deadline, :min_bid)
   end
 end

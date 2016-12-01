@@ -1,22 +1,31 @@
-<h1><%= @product.title %></h1>
 <%id   = @product.user_id %>
 <%user = User.find(id) %>
-<br>
-<h4>Title:       <%= @product.title %> </h2>
-<h4>Description: <%= @product.description %> </h2>
-<h4>Deadline:    <%= @product.deadline %> </h2>
-<h4>Minimum Bid: <%= @product.min_bid %> €</h2>
-<h4>Sold by:     <%= user.name %></h4>
 
+<h1><%= @product.title %></h1><br>
 
-<%= form_for create_bid_path, url: { controller: 'bids', action:'create' }, :html => {:method => :post} do |f| %>
+<h4>Title:       <%= @product.title       %> </h4>
+<h4>Description: <%= @product.description %> </h4>
+<h4>Deadline:    <%= @product.deadline    %> </h4>
+<h4>Minimum Bid: <%= @product.min_bid     %>€</h4>
+<h4>Sold by:     <%= user.name            %> </h4>
+
+<%= form_for :user_bid, url: create_bid_path do |f| %>
 
 <%= f.label        :amount %>
 <%= f.number_field :amount %>
-<%= f.submit %>
-<br>
-<br>
+
+<%= f.label       :email %>
+<%= f.email_field :email %>
+
+<%= f.submit 'Bid' %><br><br>
 
 <%end%>
+
+<h4>Bids:</h4>
+<% @product.bids.each do |bid| %>
+  <%i    = bid.user_id%>
+  <%user = User.find(i)%>
+  <p><%= bid.amount %>€ <%= user.name  %></p>
+<%end%><br><br>
 
 <%= link_to 'Home', {action: 'index_all'} %>

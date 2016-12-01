@@ -1,12 +1,12 @@
 <% @products.each do |product| %>
-  <%i = product.user_id%>
-  <%user = User.find(i)%>
-  <h1><%= product.title %></h1>
-  <br>
-  <h4>Title:       <%= product.title %> </h2>
-  <h4>Description: <%= product.description %> </h2>
-  <h4>Deadline:    <%= product.deadline %> </h2>
-  <h4>Minimum Bid: <%= product.min_bid %> €</h4>
-  <h4>Sold by:     <%= user.name %></h4>
-  <%= link_to 'Details', {controller: 'products', action: 'show_product', id: product.id} %>
+    <%i = product.user_id%>
+    <%user = User.find(i)%>
+    <h1><%= product.title %></h1>
+    <br>
+    <h4>Title:       <%= product.title %> </h2>
+    <h4>Description: <%= product.description %> </h2>
+    <h4>Deadline:    <%= product.deadline %> </h2>
+    <h4>Minimum Bid: <%= product.min_bid %> €</h4>
+    <h4>Sold by:     <%= user.name %></h4>
+    <%= link_to 'Details', {controller: 'products', action: 'show_product', id: product.id} %>
 <%end%>

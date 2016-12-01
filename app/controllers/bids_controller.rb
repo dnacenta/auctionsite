@@ -3,6 +3,7 @@ class BidsController < ApplicationController
   end
 
   def create
+    @bid = Bid.new
   end
 
   def destroy

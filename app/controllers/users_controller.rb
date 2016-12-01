@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find_by(id: params[:id])
+    @user = User.find(params[:id])
     unless @user
       render json: {error: 'User not found'}, status: 404
       return
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find_by(id: params[:id])
+    @user = User.find(params[:id])
     unless @user
       render json: {error: 'User not found'}, status: 404
       return

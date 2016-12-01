@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find(params[:user_id])
     unless @user
       render json: {error: 'User not found'}, status: 404
       return
@@ -15,16 +15,20 @@ class ProductsController < ApplicationController
 
 
   def show
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find(params[:user_id])
     unless @user
       render json: {error: 'User not found'}, status: 404
       return
     end
-    @product = @user.products.find_by(id: params[:id])
+    @product = @user.products.find(params[:id])
+  end
+
+  def show_product
+    @product = Product.find(params[:id])
   end
 
   def new
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find(params[:user_id])
     unless @user
       render json: {error: 'Product not found'}, status: 404
       return
@@ -33,7 +37,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find(params[:user_id])
     unless @user
       render json: {error: 'Product not found'}, status: 404
       return
@@ -43,12 +47,12 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find(params[:user_id])
     unless user
       render json: {error: 'Product not found'}, status: 404
       return
     end
-    @product = @user.products.find_by(id: params[:id])
+    @product = @user.products.find(params[:id])
     unless @product
       render json: {error: 'Product not found'}, status: 404
       return

@@ -3,7 +3,9 @@
 <% @products.each do |product| %>
   <h2><%= product.title %></h2>
   <h4>Description: <%= product.description %> </h4>
-  <h4>Deadline: <%= product.deadline %> </h4>
-  <h4>Minimum Bid: <%= product.min_bid %> </h4>
+  <h4>Deadline:    <%= product.deadline %> </h4>
+  <h4>Minimum Bid: <%= product.min_bid %> €</h4>
   <br>
 <%end%>
+
+<%= link_to 'Home', {action: 'index_all'} %>
